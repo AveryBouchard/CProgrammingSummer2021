@@ -19,12 +19,13 @@ int main()
 #define SIZE (5)
 {
     /* initialize variables */
-    float gross[SIZE] = {};            /* gross pay for week (wage * hours) */
-    float hoursWorked[SIZE] = {};    /* number of hours worked per week */
-    int idx;                /* loop index */
-    float overtimeHours[SIZE] = {}; 
     const int standardHours = 40; /* standard 40 hour work week */
     const float otRate = 1.5; /* multiply OT hours by this number */
+    int idx;                /* loop index */
+    /* initialize arrays */
+    float gross[SIZE] = {};            /* gross pay for week (wage * hours) */
+    float hoursWorked[SIZE] = {};    /* number of hours worked per week */
+    float overtimeHours[SIZE] = {}; 
     const int employeesToProcess = 5; /* how many employees will need to be processed? */
     long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615}; /* employee clock number */
     float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35}; /* hourly wage */
@@ -65,6 +66,8 @@ int main()
         printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", clockNumber[idx], hourlyWage[idx], hoursWorked[idx], overtimeHours[idx], gross[idx]);
 
     }
+
+    printf("\n\n");
 
     return (0);
 
