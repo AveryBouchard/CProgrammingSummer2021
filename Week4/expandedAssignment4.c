@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 int main()
-#define SIZE (5)
+#define SIZE (5) /* Number of employees to process <-- change this for more or less employees*/
 {
     /* initialize variables */
     const int standardHours = 40; /* standard 40 hour work week */
