@@ -59,7 +59,7 @@ int main()
 
 
 
-int employeeInput(){
+int employeeInput(){ /* Input hours for each employee */
     /* begin for loop */
     for (idx = 0; idx < employeesToProcess; idx++)
     {
@@ -69,10 +69,10 @@ int employeeInput(){
         scanf("%f", &hoursWorked[idx]);
 
     }
-    return(hoursWorked[idx]);
+    return(hoursWorked);
 }
 
-float calculateOT(hoursWorked[idx]){
+float calculateOT(){
     if (hoursWorked[idx] >= standardHours)
     {
         overtimeHours[idx] = hoursWorked[idx] - standardHours;        
@@ -85,7 +85,7 @@ float calculateOT(hoursWorked[idx]){
     
 }
 
-printTableStart(){
+printTableHeader(){
     /* start of table */
     printf("\n\tClock # | Wage | Hours | OT Hours | Gross\n");
     printf("\t______________________________________________________\n\n");
@@ -112,6 +112,7 @@ printEmployeeData(){
     return (0);
 }
 
+
 calculateTotals(){
     /* calculate gross pay */
     gross[idx] = hourlyWage[idx] * (hoursWorked[idx] - overtimeHours[idx]) + overtimeHours[idx] * otRate;
@@ -123,6 +124,10 @@ calculateTotals(){
         grossTotal += gross[idx]; /* add gross pay to all previous employees */
 
 
+}
+
+
+calculateAverage(){
         /* calculate averages */
         wageAverage = wageTotal / SIZE;
         hoursAverage = hoursTotal / SIZE;
