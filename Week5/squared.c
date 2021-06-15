@@ -1,6 +1,8 @@
 #include <stdio.h>
 
-int square(number){
+int square(int number); /* prototype */
+
+int square(int number){
 
     int result;
 

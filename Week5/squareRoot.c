@@ -17,9 +17,16 @@ float squareRoot(float x){
     const float epsilon = .00001;
     float guess = 1.0;
 
+    if(x < 0){
+
+        printf("Negative argument to square root\n");
+
+        return(-1);
+    }
+
     while (absoluteValue((guess * guess) - x) >= epsilon)
         guess = ((x / guess) + guess) / 2.0;
-        
+
     return guess;
 }
 
