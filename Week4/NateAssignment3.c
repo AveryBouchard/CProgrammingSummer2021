@@ -22,7 +22,6 @@ int main()
     
     int count; /* loop index */
     float gross;  
-    float wage;/* gross pay for week (wage * hours) */ 
     float hours;      /* number of hours worked per week */ 
     const float STD_HOURS = 40; /* making a 40 hour constant work week */
 	const float OT_rate = 1.5 ; /* setting the overtime pay rate of 1.5 times the wage */
