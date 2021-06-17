@@ -1,3 +1,4 @@
+
 /*********************************************************/
 //
 // Homework: 3 (Chapter 8)
@@ -62,7 +63,7 @@ int main()
         }
 
         /* calculate gross pay */
-        gross[idx] = hourlyWage[idx] * (hoursWorked[idx] - overtimeHours[idx]) + overtimeHours[idx] * otRate;
+        gross[idx] = hourlyWage[idx] * (hoursWorked[idx] - overtimeHours[idx]) + (overtimeHours[idx] * otRate * hourlyWage[idx]);
 
         /* calculate totals */
         wageTotal += hourlyWage[idx]; /* add employee wage to all previous employees wages */
