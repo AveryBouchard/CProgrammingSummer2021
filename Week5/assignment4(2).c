@@ -1,3 +1,4 @@
+
 /*********************************************************/
 //
 // Homework: 3 (Chapter 8)
@@ -14,18 +15,19 @@
 //********************************************************/
 
 #include <stdio.h>
+
+// constants
 #define SIZE (5) /* Number of employees to process <-- change this for more or less employees*/
+#define STANDARD_HOURS (40) /* standard 40 hour work week */
+#define OT_RATE (1.5) /* multiply OT hours by this number */
 
-const float otRate = 1.5; /* multiply OT hours by this number */
-
-
-
+// function prototypes
+void getHours(long int clockNumber[], float hoursWorked[], int size);
+float calcOvertimeHours(long int, int);
 
 int main()
 {
     /* initialize variables */
-    const int standardHours = 40; /* standard 40 hour work week */
-    const int employeesToProcess = 5; /* how many employees will need to be processed? */
     int idx;                /* loop index */
 
     /* initialize variables to calculate totals and averages */
@@ -45,29 +47,17 @@ int main()
     long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615}; /* employee clock number */
     float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35}; /* hourly wage */
 
-    /* prototypes*/
-    float calcGrossPay(float hourlyWage, float hoursWorked, float overtimeHours);
-
+    
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
 
     /* begin for loop */
-    for (idx = 0; idx < employeesToProcess; idx++)
+    for (idx = 0; idx < SIZE; idx++)
     {
+        calcOvertimeHours(clockNumber[idx], SIZE);
 
-        /* prompt for input values */
-        printf("Enter the number of hours employee %li worked: ", clockNumber[idx]);
-        scanf("%f", &hoursWorked[idx]);
-
-        if (hoursWorked[idx] >= standardHours)
-        {
-            overtimeHours[idx] = hoursWorked[idx] - standardHours;        
-        }
-        else{
-            overtimeHours[idx] = 0;
-        }
-
-        calcGrossPay(hourlyWage[], hoursWorked[], overtimeHours[]);
+        /* calculate gross pay */
+        gross[idx] = hourlyWage[idx] * (hoursWorked[idx] - overtimeHours[idx]) + (overtimeHours[idx] * OT_RATE  * hourlyWage[idx]);
 
         /* calculate totals */
         wageTotal += hourlyWage[idx]; /* add employee wage to all previous employees wages */
@@ -77,13 +67,16 @@ int main()
 
     }
 
-    void printTableHeader(void);
-
     /* calculate averages */
     wageAverage = wageTotal / SIZE;
     hoursAverage = hoursTotal / SIZE;
     otAverage = otTotal / SIZE;
     grossAverage = grossTotal / SIZE;
+
+
+    /* start of table */
+    printf("\n\tClock # | Wage | Hours | OT Hours | Gross\n");
+    printf("\t______________________________________________________\n\n");
 
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
@@ -107,42 +100,44 @@ int main()
 } /* main function */
 
 
-/***************************************************************************/
-// function: printTableHeader
+//************************************************************************************
+// Function: getHours
 //
-// purpose: this can head the table on each page before employee pay data is printed
+// Purpose: get input from user, the number of hours worked per employee and stores the result in the
+//              local variable called hoursWorked, that is passed to the calling function.
 //
-// parameters: none
+// Parameters: clockNumber - the clock number of the employee
 //
-// returns: void
-/****************************************************************************/
-
-void printTableHeader(void)
+// Returns: hoursWorked - the number of hours worked for the given employee
+//**************************************************************************************
+void getHours(long int clockNumber[], float hoursWorked, int size)
 {
 
-/* start of table */
-printf("\n\tClock # | Wage | Hours | OT Hours | Gross\n");
-printf("\t______________________________________________________\n\n");
+    int idx;
+
+    for(idx = 0; idx < idx; ++idx)
+    /* prompt for input values */
+        printf("Enter the number of hours employee %li worked: ", clockNumber[idx]);
+        scanf("%f", &hoursWorked[idx]);
+
+    printf("\n\n");
 
 }
 
+// float calcOvertimeHours(long int clockNumber, int size)
+// {
+    
+//     float hoursWorked, overtimeHours;
 
-/***************************************************************************/
-// function: calcGrossPay
-//
-// purpose: takes in hourly wage, hours worked, and overtime hours and calculates 
-//              employee gross pay amount
-//
-// parameters: hourlyWage, hoursWorked, overtimeHours
-//
-// returns: gross pay for the employee
-/****************************************************************************/
+//     hoursWorked = getHours(clockNumber);
 
-float calcGrossPay(float hourlyWage, float hoursWorked, float overtimeHours){
+//     if (hoursWorked >= STANDARD_HOURS)
+//     {
+//         overtimeHours = hoursWorked - STANDARD_HOURS;        
+//     }
+//     else{
+//         overtimeHours = 0;
+//     }
 
-    float gross;
-
-    gross = hourlyWage * (hoursWorked - overtimeHours) + (overtimeHours * otRate * hourlyWage);
-
-    return gross;
-}
+//     return overtimeHours;
+// }
