@@ -11,15 +11,14 @@
 //
 // Description: Program which determines gross pay
 //
-//
 //********************************************************/
 
 #include <stdio.h>
 
 // constants
-#define SIZE (5) /* Number of employees to process <-- change this for more or less employees*/
-#define STANDARD_HOURS (40) /* standard 40 hour work week */
-#define OT_RATE (1.5) /* multiply OT hours by this number */
+#define SIZE (5)                /* Number of employees to process <-- change this for more or less employees*/
+#define STANDARD_HOURS (40)     /* standard 40 hour work week */
+#define OT_RATE (1.5)           /* multiply OT hours by this number */
 
 // function prototypes
 void getHours(long int clockNumber[], float hoursWorked[]);
@@ -32,11 +31,11 @@ void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[],
 int main()
 {    
     /* initialize arrays */
-    float gross[SIZE] = {};            /* gross pay for week (wage * hours) */
-    float hoursWorked[SIZE] = {};    /* number of hours worked per week */
-    float overtimeHours[SIZE] = {}; 
-    long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615}; /* employee clock number */
-    float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35}; /* hourly wage */
+    float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
+    float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
+    float overtimeHours[SIZE] = {};                                             /* calculated overtime hours worked */
+    long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615};       /* employee clock number */
+    float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35};                  /* hourly wage */
 
     
     printf("This is a program to calculate gross pay.\n");
@@ -53,6 +52,8 @@ int main()
     printEmployeeTable(clockNumber, hourlyWage, hoursWorked, overtimeHours, gross);
 
     printf("\t_______________________________________________________\n");
+
+    printTotals(hourlyWage, hoursWorked, overtimeHours, gross);
 
     printf("\n\n");
 
@@ -174,6 +175,18 @@ void printEmployeeTable(long int clockNumber[], float hourlyWage[], float hoursW
     }
 }
 
+//************************************************************************************
+// Function: printTotals
+//
+// Purpose: adds each element in the arrays for wage, hours, ot hours and gross pay
+//
+// Parameters: hourlyWage - the number of hours the employee worked
+//             hoursWorked - hours worked input by the user in the getHours function
+//             overtimeHours - the number of overtime hours the employee hoursWorked
+//             gross - the gross pay the employee will recieve
+//
+// Returns: none - prints all totals to the console
+//**************************************************************************************
 void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[])
 {
 
