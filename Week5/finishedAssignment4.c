@@ -190,7 +190,10 @@ void printEmployeeTable(long int clockNumber[], float hourlyWage[], float hoursW
 void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[])
 {
 
-    float wageTotal, hoursTotal, otTotal, grossTotal;
+    float wageTotal = 0;
+    float hoursTotal = 0;
+    float otTotal = 0;
+    float grossTotal = 0;
     int idx;
 
     for (idx = 0; idx < SIZE; ++idx){
