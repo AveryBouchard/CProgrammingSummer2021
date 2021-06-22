@@ -26,7 +26,7 @@ void calcOvertimeHours(float hoursWorked[], float overtimeHours[]);
 void printTableHeader();
 void calcGrossPay(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[]);
 void printEmployeeTable(long int clockNumber[], float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[]);
-void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[]);
+void printTotalsAndAverages(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[]);
 
 int main()
 {    
@@ -53,7 +53,7 @@ int main()
 
     printf("\t_______________________________________________________\n");
 
-    printTotals(hourlyWage, hoursWorked, overtimeHours, gross);
+    printTotalsAndAverages(hourlyWage, hoursWorked, overtimeHours, gross);
 
     printf("\n\n");
 
@@ -187,13 +187,17 @@ void printEmployeeTable(long int clockNumber[], float hourlyWage[], float hoursW
 //
 // Returns: none - prints all totals to the console
 //**************************************************************************************
-void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[])
+void printTotalsAndAverages(float hourlyWage[], float hoursWorked[], float overtimeHours[], float gross[])
 {
 
     float wageTotal = 0;
     float hoursTotal = 0;
     float otTotal = 0;
     float grossTotal = 0;
+    float wageAverage = 0;
+    float hoursAverage = 0;
+    float otAverage = 0;
+    float grossAverage = 0;
     int idx;
 
     for (idx = 0; idx < SIZE; ++idx){
@@ -205,6 +209,12 @@ void printTotals(float hourlyWage[], float hoursWorked[], float overtimeHours[],
 
     }
 
+    wageAverage = wageTotal/ SIZE;
+    hoursAverage = hoursTotal / SIZE;
+    otAverage = otTotal / SIZE;
+    grossAverage = grossTotal / SIZE;
+
     printf("\n\tTotal %9.2f %6.1f %7.2f %12.2f\n", wageTotal, hoursTotal, otTotal, grossTotal);
+    printf("\n\tAverage %7.2f %6.1f %7.2f %12.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
 
 }
