@@ -1,4 +1,3 @@
-
 /*********************************************************/
 //
 // Homework: 4 (Chapter 7)
@@ -12,6 +11,16 @@
 // Description: Program which determines gross pay
 //
 //********************************************************/
+
+
+struct employees
+{
+    long int clockNumber;
+    float hourlyWage;
+    float hoursWorked;
+    float otHours;
+    float gross;
+};
 
 #include <stdio.h>
 
@@ -30,6 +39,18 @@ void printTotalsAndAverages(float hourlyWage[], float hoursWorked[], float overt
 
 int main()
 {    
+
+    struct employees toProcess;
+    {
+
+        long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615};       /* employee clock number */
+        float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35};                  /* hourly wage */
+        float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
+        float overtimeHours[SIZE] = {};                                             /* calculated overtime hours worked */
+        float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
+
+    }
+
     /* initialize arrays */
     float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
     float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
