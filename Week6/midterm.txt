@@ -1,4 +1,4 @@
-1.a 
+1.a)
 
 /*****************************************************/
 // Function: triangleArea
@@ -19,10 +19,10 @@ float triangleArea(float height, float base)
     area = (height * base) * .5;
 
     return area;
-
 }
 
-1.b
+
+1.b)
 
 /*****************************************************/
 // Function: trianglePerimeter
@@ -44,4 +44,74 @@ float trianglePerimeter(float sideA, float sideB, float sideC)
 
     return perimeter;
 }
+______________________________________________________________________________
+
+
+2)
+
+/*****************************************************/
+// Function: frequency
+//
+// Description: takes in the first n number of elements in and
+//              returns how many times another number x occurs 
+//              in the array.          
+//
+// Parameters: theArray[] - an array of numbers to be looped through
+//             x - the number we are looking for in the array
+//             n - the number of elements the function is looping through
+//
+// Returns: count - the number of times x is found in the first n elements
+/******************************************************/
+
+int frequency (int theArray [], int n, int x)
+{
+    int count = 0;      // increases for number of time n is in array
+    int idx;            //index of array
+
+    for (idx = 0; idx < n; ++idx)
+    {
+        if (theArray[idx] == x)
+            {
+                count += 1;
+            }
+    }
+
+    return count;
+}
+
+_________________________________________________________________________________
+
+
+3.a)
+
+/*****************************************************/
+// Function: max
+//
+// Description: takes in 5 numbers and returns the largest number          
+//
+// Parameters: v, w, x, y, z - 5 numbers input to function
+//
+// Returns: largest - the biggest number in the set 
+/******************************************************/
+
+int max (int v, int w, int x, int y, int z)
+{
+    int largest = 0;
+    int array[5] = {v, w, x, y, z};
+    int idx;
+
+    for (idx = 0; idx < 5; ++idx)
+    {
+        if (array[idx] > largest)
+            largest = array[idx];
+    }
+
+    return largest;
+      
+}
+
+3.b)
+
+
+____________________________________________________________________________________
 
