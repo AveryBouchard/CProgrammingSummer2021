@@ -1,6 +1,6 @@
 /*********************************************************/
 //
-// Homework: 4 (Chapter 7)
+// Homework: 5 (Chapter 8)
 //
 // Name: Avery Bouchard
 //
@@ -8,12 +8,17 @@
 //
 // Date: 6/21/2021
 //
-// Description: Program which determines gross pay
+// Description: This program prompts the user for the number of hours
+// worked for each employee. It then calculates gross pay
+// including overtime and displays the results in table. Functions
+// and structures are used.
 //
 //********************************************************/
 
 #include <stdio.h>
 
+
+//define global structure for employee
 struct employees
 {
     long int clockNumber;
@@ -31,28 +36,27 @@ struct employees
 // function prototypes
 void getHours(struct employees employeeData[]);
 void calcOvertimeHours(struct employees employeeData[]);
-void printTableHeader();
-void calcGrossPay(struct employees employeeData[]);
+void printTableHeader();                                                    // we can pass the employee structure as a parameter to each function
+void calcGrossPay(struct employees employeeData[]);                         // instead of passing each variable individually
 void printEmployeeTable(struct employees employeeData[]);
 void printTotalsAndAverages(struct employees employeeData[]);
 
 int main()
 {    
 
-    struct employees employeeData;
-    {
-
-        long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615};       /* employee clock number */
-        float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35};                  /* hourly wage */
-        float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
-        float otHours[SIZE] = {};                                                   /* calculated overtime hours worked */
-        float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
-
-    }
+    struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
+        {98401, 10.6},
+        {526488, 9.75},
+        {765349, 10.5},
+        {34645, 12.25},
+        {127615, 8.35}
+    };
  
+
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
 
+    //function calls in main function
     getHours(employeeData);
 
     calcOvertimeHours(employeeData);
@@ -182,7 +186,7 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].overtimeHours, employeeData[idx].gross);
+        printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
 }
@@ -217,7 +221,7 @@ void printTotalsAndAverages(struct employees employeeData[])
 
         wageTotal += employeeData[idx].hourlyWage; /* add employee wage to all previous employees wages */
         hoursTotal += employeeData[idx].hoursWorked; /* add hours worked to total previous employees hours */
-        otTotal += employeeData[idx].overtimeHours; /* add overtime hours to all previous employees */
+        otTotal += employeeData[idx].otHours; /* add overtime hours to all previous employees */
         grossTotal += employeeData[idx].gross; /* add gross pay to all previous employees */
 
     }
