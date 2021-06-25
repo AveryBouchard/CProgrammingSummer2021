@@ -39,16 +39,28 @@ void printTotalsAndAverages(struct employees employeeData[]);
 int main()
 {    
 
-    struct employees employeeData;
-    {
+    struct employees employeeData[SIZE] = {
+        {98401, 10.6},
+        {526488, 9.75},
+        {765349, 10.5},
+        {34645, 12.25},
+        {127615, 8.35}
+    };
 
-        long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615};       /* employee clock number */
-        float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35};                  /* hourly wage */
-        float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
-        float otHours[SIZE] = {};                                                   /* calculated overtime hours worked */
-        float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
 
-    }
+    //This is how I initially tried to initialize the employee data, but it needs
+    //to be done like above.
+
+    // struct employees employeeData;
+    // {
+
+    //     long int clockNumber [SIZE] = {98401, 526488, 765349, 34645, 127615};       /* employee clock number */
+    //     float hourlyWage [SIZE] = {10.6, 9.75, 10.5, 12.25, 8.35};                  /* hourly wage */
+    //     float hoursWorked[SIZE] = {};                                               /* number of hours worked per week */
+    //     float otHours[SIZE] = {};                                                   /* calculated overtime hours worked */
+    //     float gross[SIZE] = {};                                                     /* gross pay for week (wage * hours) */
+
+    // }
  
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
@@ -182,7 +194,7 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].overtimeHours, employeeData[idx].gross);
+        printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
 }
@@ -217,7 +229,7 @@ void printTotalsAndAverages(struct employees employeeData[])
 
         wageTotal += employeeData[idx].hourlyWage; /* add employee wage to all previous employees wages */
         hoursTotal += employeeData[idx].hoursWorked; /* add hours worked to total previous employees hours */
-        otTotal += employeeData[idx].overtimeHours; /* add overtime hours to all previous employees */
+        otTotal += employeeData[idx].otHours; /* add overtime hours to all previous employees */
         grossTotal += employeeData[idx].gross; /* add gross pay to all previous employees */
 
     }

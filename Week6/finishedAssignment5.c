@@ -28,7 +28,7 @@ struct employees
     float gross;
 };
 
-// constants
+// global constants
 #define SIZE (5)                /* Number of employees to process <-- change this for more or less employees*/
 #define STANDARD_HOURS (40)     /* standard 40 hour work week */
 #define OT_RATE (1.5)           /* multiply OT hours by this number */
