@@ -30,7 +30,7 @@ int main()
 
     // initialize structure
     struct teamStats blueTeam =
-        {5, 2, 1, 1, 7, 3, 3, 4};
+        {67, 16, 23, 7, 83, 22, 33, 4};
 
     // call functions
     defenseStats(blueTeam);
