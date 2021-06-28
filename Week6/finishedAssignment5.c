@@ -211,7 +211,7 @@ void printTotalsAndAverages(struct employees employeeData[])
     float hoursTotal = 0;
     float otTotal = 0;
     float grossTotal = 0;
-    float wageAverage = 0;
+    float wageAverage = 0;calcOvertimeHours.o calcGrossPay.o printTable.o printEmployeeTable.o printTotalsAndAverages.o
     float hoursAverage = 0;
     float otAverage = 0;
     float grossAverage = 0;
