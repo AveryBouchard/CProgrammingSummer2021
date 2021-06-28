@@ -19,6 +19,14 @@
 
 
 //define global structure for employee
+
+struct name
+{
+    char first[50];
+    char middleInitial[3];
+    char last [100];
+};
+
 struct employees
 {
     long int clockNumber;
@@ -27,13 +35,6 @@ struct employees
     float otHours;
     float gross;
     struct name employeeName;
-};
-
-struct name
-{
-    char first[50];
-    char middleInitial[10];
-    char last [100];
 };
 
 // global constants
@@ -53,11 +54,11 @@ int main()
 {    
 
     struct name employeeName = {
-        {"Connie", "A", "Courderoy"},
-        {"Kobi", "C", "McLoberton"},
-        {"Courtney", "A", "Coughlin"},
-        {"Avery", "S", "Bouchard"},
-        {"Stella", "B", "Bella"}
+        {"Connie A Courderoy"},
+        {"Kobi C McLobe"},
+        {"Courtney A Coughlin"},
+        {"Avery S Bouchard"},
+        {"Stella B Bella"}
     };
 
     struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
