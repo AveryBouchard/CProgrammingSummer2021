@@ -184,7 +184,7 @@ void calcGrossPay(struct employees employeeData[])
 void printTableHeader()
 {
     /* start of table */
-    printf("\n\tEmployee Name         |     Wage | Hours | OT Hours | Gross\n");
+    printf("\n\tEmployee Name         | Clock#       |  Wage | Hours | OT Hours | Gross\n");
     printf("\t______________________________________________________\n\n");
 }
 
@@ -204,7 +204,7 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%s, %s %s. \t%8.2f %7.1f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
+        printf("\t%s, %s %s. \t%06li \t%13.2f \t%.1f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
 struct name employeeName[SIZE] = {
@@ -240,6 +240,12 @@ void printTotalsAndAverages(struct employees employeeData[])
     float hoursAverage = 0;
     float otAverage = 0;
     float grossAverage = 0;
+    float minHours = employeeData[0].hoursWorked;
+    float minOvertime = employeeData[0].otHours;
+    float minGross = employeeData[0].gross;
+    float maxHours = 0;
+    float maxOvertime = 0;
+    float maxGross = 0;
     int idx;
 
     for (idx = 0; idx < SIZE; ++idx){
@@ -249,6 +255,24 @@ void printTotalsAndAverages(struct employees employeeData[])
         otTotal += employeeData[idx].otHours; /* add overtime hours to all previous employees */
         grossTotal += employeeData[idx].gross; /* add gross pay to all previous employees */
 
+        if (employeeData[idx].hoursWorked < minHours)
+            minHours = employeeData[idx].hoursWorked;
+
+        if (employeeData[idx].otHours < minOvertime)
+            minOvertime = employeeData[idx].otHours;
+
+        if (employeeData[idx].gross < minGross)
+            minGross = employeeData[idx].gross;
+
+        if (employeeData[idx].hoursWorked > maxHours)
+            maxHours = employeeData[idx].hoursWorked;
+
+        if (employeeData[idx].otHours > maxOvertime)
+            maxOvertime = employeeData[idx].otHours;
+
+        if (employeeData[idx].gross > maxGross)
+            maxGross = employeeData[idx].gross;
+
     }
 
     wageAverage = wageTotal/ SIZE;
@@ -256,7 +280,15 @@ void printTotalsAndAverages(struct employees employeeData[])
     otAverage = otTotal / SIZE;
     grossAverage = grossTotal / SIZE;
 
-    printf("\n\tTotal \t\t%16.2f %7.1f %8.2f %10.2f", wageTotal, hoursTotal, otTotal, grossTotal);
-    printf("\n\tAverage \t\t%8.2f %7.1f %8.2f %10.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
+    printf("\n\tTotal \t\t\t\t%13.2f %7.1f %8.2f %10.2f", wageTotal, hoursTotal, otTotal, grossTotal);
+    printf("\n\tAverage \t\t\t\t%5.2f %7.1f %8.2f %10.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
+    printf("\n\tMaximums:\t\t\t\t\t%.2f %8.2f %10.2f", maxHours, maxOvertime, maxGross);
+    printf("\n\tMinimums:\t\t\t\t\t%.2f %8.2f %10.2f", minHours, minOvertime, minGross);
+
+}
+
+void minimum()
+{
+    int idx;
 
 }
