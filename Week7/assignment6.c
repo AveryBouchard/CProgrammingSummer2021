@@ -52,24 +52,26 @@ void printEmployeeTable(struct employees employeeData[]);
 void printTotalsAndAverages(struct employees employeeData[]);
 
 
-struct name employeeName[SIZE] = {
-    {"Connie", "A", "Cobol"},
-    {"Mary", "C", "Apl"},
-    {"Frank", "A", "Fortran"},
-    {"Jeff", "S", "Ada"},
-    {"Anton", "B", "Pascal"}
-};
-
 int main()
 {    
 
     struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
-        { 98401, 10.6},
-        { 526488, 9.75},
-        { 765349, 10.5},
-        { 34645, 12.25},
-        { 127615, 8.35}
+        {98401, 10.6},
+        {526488, 9.75},
+        {765349, 10.5},
+        {34645, 12.25},
+        {127615, 8.35}
     }; 
+
+    struct name employeeName[SIZE] = {
+        {"Connie", "A", "Cobol"},
+        {"Mary", "C", "Apl"},
+        {"Frank", "A", "Fortran"},
+        {"Jeff", "S", "Ada"},
+        {"Anton", "B", "Pascal"}
+    };
+
+    printf("%s\n\n", employeeData[1].employeeName.first[1]);
 
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
@@ -113,7 +115,7 @@ void getHours(struct employees employeeData[])
 
     for(idx = 0; idx < SIZE; ++idx){
     /* prompt for input values */
-        printf("Enter the number of hours employee %s %s worked: ", employeeName[idx].first, employeeName[idx].last);
+        printf("Enter the number of hours %s %s worked: ", employeeData[idx].employeeName.first, employeeData[idx].employeeName.last);
         scanf("%f", &employeeData[idx].hoursWorked);
     }
     printf("\n\n");
@@ -204,7 +206,7 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
+        printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n", employeeData[idx].employeeName.last, employeeData[idx].employeeName.first, employeeData[idx].employeeName.middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
 
