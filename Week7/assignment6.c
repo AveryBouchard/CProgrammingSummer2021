@@ -1,12 +1,12 @@
 /*********************************************************/
 //
-// Homework: 6 - strings (Chapter )
+// Homework: 6 - strings (Chapter 9)
 //
 // Name: Avery Bouchard
 //
 // Class: C Programming, Summer 2021
 //
-// Date: 6/21/2021
+// Date: 6/28/2021
 //
 // Description: This program prompts the user for the number of hours
 // worked for each employee. It then calculates gross pay
@@ -53,11 +53,11 @@ void printTotalsAndAverages(struct employees employeeData[]);
 
 
 struct name employeeName[SIZE] = {
-    {"Connie", "A", "Courderoy"},
-    {"Kobi", "C", "McLoberton"},
-    {"Courtney", "A", "Coughlin"},
-    {"Avery", "S", "Bouchard"},
-    {"Stella", "B", "Bella"}
+    {"Connie", "A", "Cobol"},
+    {"Mary", "C", "Apl"},
+    {"Frank", "A", "Fortran"},
+    {"Jeff", "S", "Ada"},
+    {"Anton", "B", "Pascal"}
 };
 
 int main()
@@ -204,16 +204,10 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%s, %s %s. \t%06li \t%13.2f \t%.1f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
+        printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
-struct name employeeName[SIZE] = {
-    {"Connie", "A", "Courderoy"},
-    {"Kobi", "C", "McLobe"},
-    {"Courtney", "A", "Coughlin"},
-    {"Avery", "S", "Bouchard"},
-    {"Stella", "B", "Bella"}
-};
+
 }
 
 //************************************************************************************
