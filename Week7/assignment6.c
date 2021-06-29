@@ -16,6 +16,7 @@
 //********************************************************/
 
 #include <stdio.h>
+#include <string.h>
 
 
 //define global structure for employee
@@ -50,16 +51,17 @@ void calcGrossPay(struct employees employeeData[]);                         // i
 void printEmployeeTable(struct employees employeeData[]);
 void printTotalsAndAverages(struct employees employeeData[]);
 
+
+struct name employeeName[SIZE] = {
+    {"Connie", "A", "Courderoy"},
+    {"Kobi", "C", "McLoberton"},
+    {"Courtney", "A", "Coughlin"},
+    {"Avery", "S", "Bouchard"},
+    {"Stella", "B", "Bella"}
+};
+
 int main()
 {    
-
-    struct name employeeName = {
-        {"Connie A Courderoy"},
-        {"Kobi C McLobe"},
-        {"Courtney A Coughlin"},
-        {"Avery S Bouchard"},
-        {"Stella B Bella"}
-    };
 
     struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
         { 98401, 10.6},
@@ -67,8 +69,7 @@ int main()
         { 765349, 10.5},
         { 34645, 12.25},
         { 127615, 8.35}
-    };
- 
+    }; 
 
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
@@ -112,7 +113,7 @@ void getHours(struct employees employeeData[])
 
     for(idx = 0; idx < SIZE; ++idx){
     /* prompt for input values */
-        printf("Enter the number of hours employee %s %s worked: ", employeeData[idx].employeeName.first, employeeData[idx].employeeName.last);
+        printf("Enter the number of hours employee %s %s worked: ", employeeName[idx].first, employeeName[idx].last);
         scanf("%f", &employeeData[idx].hoursWorked);
     }
     printf("\n\n");
@@ -183,7 +184,7 @@ void calcGrossPay(struct employees employeeData[])
 void printTableHeader()
 {
     /* start of table */
-    printf("\n\tClock # | Wage | Hours | OT Hours | Gross\n");
+    printf("\n\tEmployee Name         |     Wage | Hours | OT Hours | Gross\n");
     printf("\t______________________________________________________\n\n");
 }
 
@@ -203,9 +204,16 @@ void printEmployeeTable(struct employees employeeData[])
     /* print out employee information */
     for (idx=0; idx < SIZE; ++idx){
 
-        printf("\t%06li %8.2f %6.1f %7.2f %12.2f\n", employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
+        printf("\t%s, %s %s. \t%8.2f %7.1f %8.2f %10.2f\n", employeeName[idx].last, employeeName[idx].first, employeeName[idx].middleInitial, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
 
     }
+struct name employeeName[SIZE] = {
+    {"Connie", "A", "Courderoy"},
+    {"Kobi", "C", "McLobe"},
+    {"Courtney", "A", "Coughlin"},
+    {"Avery", "S", "Bouchard"},
+    {"Stella", "B", "Bella"}
+};
 }
 
 //************************************************************************************
@@ -248,7 +256,7 @@ void printTotalsAndAverages(struct employees employeeData[])
     otAverage = otTotal / SIZE;
     grossAverage = grossTotal / SIZE;
 
-    printf("\n\tTotal %9.2f %6.1f %7.2f %12.2f\n", wageTotal, hoursTotal, otTotal, grossTotal);
-    printf("\n\tAverage %7.2f %6.1f %7.2f %12.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
+    printf("\n\tTotal \t\t%16.2f %7.1f %8.2f %10.2f", wageTotal, hoursTotal, otTotal, grossTotal);
+    printf("\n\tAverage \t\t%8.2f %7.1f %8.2f %10.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
 
 }
