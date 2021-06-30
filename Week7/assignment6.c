@@ -16,7 +16,6 @@
 //********************************************************/
 
 #include <stdio.h>
-#include <string.h>
 
 
 //define global structure for employee
@@ -30,12 +29,12 @@ struct name
 
 struct employees
 {
+    struct name employeeName;
     long int clockNumber;
     float hourlyWage;
     float hoursWorked;
     float otHours;
     float gross;
-    struct name employeeName;
 };
 
 // global constants
@@ -51,27 +50,23 @@ void calcGrossPay(struct employees employeeData[]);                         // i
 void printEmployeeTable(struct employees employeeData[]);
 void printTotalsAndAverages(struct employees employeeData[]);
 
+char char_val;
+
 
 int main()
 {    
 
     struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
-        {98401, 10.6},
-        {526488, 9.75},
-        {765349, 10.5},
-        {34645, 12.25},
-        {127615, 8.35}
+        {{"Connie", "A", "Cobol"}, 98401, 10.6},
+        {{"Mary", "C", "Apl"}, 526488, 9.75},
+        {{"Frank", "A", "Fortran"}, 765349, 10.5},
+        {{"Jeff", "S", "Ada"}, 34645, 12.25},
+        {{"Anton", "B", "Pascal"}, 127615, 8.35}
     }; 
 
-    struct name employeeName[SIZE] = {
-        {"Connie", "A", "Cobol"},
-        {"Mary", "C", "Apl"},
-        {"Frank", "A", "Fortran"},
-        {"Jeff", "S", "Ada"},
-        {"Anton", "B", "Pascal"}
-    };
+    printf ("%c \n", char_val = 'a' + 6); 
 
-    printf("%s\n\n", employeeData[1].employeeName.first[1]);
+    printf("%s\n\n", employeeData[1].employeeName.first);
 
     printf("This is a program to calculate gross pay.\n");
     printf("You will be prompted for employee data.\n\n");
@@ -87,7 +82,7 @@ int main()
 
     printEmployeeTable(employeeData);
 
-    printf("\t_______________________________________________________\n");
+    printf("\t____________________________________________________________________________\n");
 
     printTotalsAndAverages(employeeData);
 
@@ -187,7 +182,7 @@ void printTableHeader()
 {
     /* start of table */
     printf("\n\tEmployee Name         | Clock#       |  Wage | Hours | OT Hours | Gross\n");
-    printf("\t______________________________________________________\n\n");
+    printf("\t__________________________________________________________________________\n\n");
 }
 
 
