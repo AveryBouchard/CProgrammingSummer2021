@@ -17,14 +17,13 @@
 
 #include <stdio.h>
 
-
 //define global structure for employee
 
 struct name
 {
     char first[50];
     char middleInitial[3];
-    char last [100];
+    char last[100];
 };
 
 struct employees
@@ -38,33 +37,27 @@ struct employees
 };
 
 // global constants
-#define SIZE (5)                /* Number of employees to process <-- change this for more or less employees*/
-#define STANDARD_HOURS (40)     /* standard 40 hour work week */
-#define OT_RATE (1.5)           /* multiply OT hours by this number */
+#define SIZE (5)            /* Number of employees to process <-- change this for more or less employees*/
+#define STANDARD_HOURS (40) /* standard 40 hour work week */
+#define OT_RATE (1.5)       /* multiply OT hours by this number */
 
 // function prototypes
 void getHours(struct employees employeeData[]);
 void calcOvertimeHours(struct employees employeeData[]);
-void printTableHeader();                                                    // we can pass the employee structure as a parameter to each function
-void calcGrossPay(struct employees employeeData[]);                         // instead of passing each variable individually
+void printTableHeader();                            // we can pass the employee structure as a parameter to each function
+void calcGrossPay(struct employees employeeData[]); // instead of passing each variable individually
 void printEmployeeTable(struct employees employeeData[]);
 void printTotalsAndAverages(struct employees employeeData[]);
 
-char char_val;
-
-
 int main()
-{    
+{
 
-    struct employees employeeData[SIZE] = {     // initialize employee data (clockNumber and hourlyWage)
-        {{"Connie", "A", "Cobol"}, 98401, 10.6},
-        {{"Mary", "C", "Apl"}, 526488, 9.75},
-        {{"Frank", "A", "Fortran"}, 765349, 10.5},
-        {{"Jeff", "S", "Ada"}, 34645, 12.25},
-        {{"Anton", "B", "Pascal"}, 127615, 8.35}
-    }; 
-
-    printf ("%c \n", char_val = 'a' + 6); 
+    struct employees employeeData[SIZE] = {// initialize employee data (clockNumber and hourlyWage)
+                                           {{"Connie", "A", "Cobol"}, 98401, 10.6},
+                                           {{"Mary", "C", "Apl"}, 526488, 9.75},
+                                           {{"Frank", "A", "Fortran"}, 765349, 10.5},
+                                           {{"Jeff", "S", "Ada"}, 34645, 12.25},
+                                           {{"Anton", "B", "Pascal"}, 127615, 8.35}};
 
     printf("%s\n\n", employeeData[1].employeeName.first);
 
@@ -92,7 +85,6 @@ int main()
 
 } /* main function */
 
-
 //************************************************************************************
 // Function: getHours
 //
@@ -108,15 +100,14 @@ void getHours(struct employees employeeData[])
 
     int idx;
 
-    for(idx = 0; idx < SIZE; ++idx){
-    /* prompt for input values */
+    for (idx = 0; idx < SIZE; ++idx)
+    {
+        /* prompt for input values */
         printf("Enter the number of hours %s %s worked: ", employeeData[idx].employeeName.first, employeeData[idx].employeeName.last);
         scanf("%f", &employeeData[idx].hoursWorked);
     }
     printf("\n\n");
-
 }
-
 
 //************************************************************************************
 // Function: calcOvertimeHours
@@ -131,25 +122,24 @@ void getHours(struct employees employeeData[])
 //**************************************************************************************
 void calcOvertimeHours(struct employees employeeData[])
 {
-    
-    int idx; 
 
-    for(idx = 0; idx < SIZE; ++idx)
+    int idx;
+
+    for (idx = 0; idx < SIZE; ++idx)
 
         if (employeeData[idx].hoursWorked >= STANDARD_HOURS)
         {
-            employeeData[idx].otHours = employeeData[idx].hoursWorked - STANDARD_HOURS;        
+            employeeData[idx].otHours = employeeData[idx].hoursWorked - STANDARD_HOURS;
         }
-        else{
+        else
+        {
             employeeData[idx].otHours = 0;
         }
 }
-
-
 //************************************************************************************
 // Function: calcGrossPay
 //
-// Purpose: given the clock number, hours worked and ovetime hours, function calculates 
+// Purpose: given the clock number, hours worked and ovetime hours, function calculates
 //              the total amount of pay.
 //
 // Parameters: clockNumber - the clock number of the employee
@@ -168,7 +158,6 @@ void calcGrossPay(struct employees employeeData[])
     }
 }
 
-
 //******************************************************************************
 // Function: printTableHeader
 //
@@ -185,7 +174,6 @@ void printTableHeader()
     printf("\t__________________________________________________________________________\n\n");
 }
 
-
 //******************************************************************************
 // Function: prints the employee wage, hours, ot hours and gross pay
 //
@@ -199,12 +187,11 @@ void printEmployeeTable(struct employees employeeData[])
     int idx;
 
     /* print out employee information */
-    for (idx=0; idx < SIZE; ++idx){
+    for (idx = 0; idx < SIZE; ++idx)
+    {
 
         printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n", employeeData[idx].employeeName.last, employeeData[idx].employeeName.first, employeeData[idx].employeeName.middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
-
     }
-
 }
 
 //************************************************************************************
@@ -239,12 +226,13 @@ void printTotalsAndAverages(struct employees employeeData[])
     float maxGross = 0;
     int idx;
 
-    for (idx = 0; idx < SIZE; ++idx){
+    for (idx = 0; idx < SIZE; ++idx)
+    {
 
-        wageTotal += employeeData[idx].hourlyWage; /* add employee wage to all previous employees wages */
+        wageTotal += employeeData[idx].hourlyWage;   /* add employee wage to all previous employees wages */
         hoursTotal += employeeData[idx].hoursWorked; /* add hours worked to total previous employees hours */
-        otTotal += employeeData[idx].otHours; /* add overtime hours to all previous employees */
-        grossTotal += employeeData[idx].gross; /* add gross pay to all previous employees */
+        otTotal += employeeData[idx].otHours;        /* add overtime hours to all previous employees */
+        grossTotal += employeeData[idx].gross;       /* add gross pay to all previous employees */
 
         if (employeeData[idx].hoursWorked < minHours)
             minHours = employeeData[idx].hoursWorked;
@@ -263,10 +251,9 @@ void printTotalsAndAverages(struct employees employeeData[])
 
         if (employeeData[idx].gross > maxGross)
             maxGross = employeeData[idx].gross;
-
     }
 
-    wageAverage = wageTotal/ SIZE;
+    wageAverage = wageTotal / SIZE;
     hoursAverage = hoursTotal / SIZE;
     otAverage = otTotal / SIZE;
     grossAverage = grossTotal / SIZE;
@@ -275,11 +262,9 @@ void printTotalsAndAverages(struct employees employeeData[])
     printf("\n\tAverage \t\t\t\t%5.2f %7.1f %8.2f %10.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
     printf("\n\tMaximums:\t\t\t\t\t%.2f %8.2f %10.2f", maxHours, maxOvertime, maxGross);
     printf("\n\tMinimums:\t\t\t\t\t%.2f %8.2f %10.2f", minHours, minOvertime, minGross);
-
 }
 
 void minimum()
 {
     int idx;
-
 }
