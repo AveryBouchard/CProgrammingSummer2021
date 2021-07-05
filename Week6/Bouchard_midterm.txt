@@ -194,32 +194,26 @@ int gradesTotal(char grades[], int length)
                 {
                     case 'A':
                         a += 1;
-                        printf("That was an A\n");
                         break;
                     
                     case 'B':
                         b += 1;
-                        printf("That was a B\n");
                         break;
 
                     case 'C':
                         c += 1;
-                        printf("That was a C\n");
                         break;
 
                     case 'D':
                         d += 1;
-                        printf("That was a D\n");
                         break;
 
                     case 'F':
                         f += 1;
-                        printf("That was an F\n");
                         break;
 
                     default:
                         i += 1;
-                        printf("That was invalid\n");
                         break;
                 }
             }
