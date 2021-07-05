@@ -207,7 +207,7 @@ void printEmployeeTable(struct employees employeeData[])
 //
 // Returns: none - prints all totals and averages to the console
 //**************************************************************************************
-void printTotalsAndAverages(struct employees employeeData[])
+void printTotalsAndAverages(struct employees employeeData[]) // pass by reference
 {
 
     float wageTotal = 0;
