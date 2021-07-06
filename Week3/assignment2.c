@@ -18,14 +18,14 @@
 int main()
 {
     /* initialize variables */
-    int clockNumber;        /* employee clock number */
-    float gross;            /* gross pay for week (wage * hours) */
-    float hoursWorked;      /* number of hours worked per week */
-    float hourlyWage;       /* hourly wage */
-    int idx;                /* loop index */
+    int clockNumber;   /* employee clock number */
+    float gross;       /* gross pay for week (wage * hours) */
+    float hoursWorked; /* number of hours worked per week */
+    float hourlyWage;  /* hourly wage */
+    int idx;           /* loop index */
     float overtimeHours;
-    const float standadHours = 40; /* standard 40 hour work week */
-    const float otRate = 1.5; /* multiply OT hours by this number */
+    const float standadHours = 40;    /* standard 40 hour work week */
+    const float otRate = 1.5;         /* multiply OT hours by this number */
     const int employeesToProcess = 5; /* how many employees will need to be processed? */
 
     // /* prompt for number of employees that will need to be processed */
@@ -48,14 +48,15 @@ int main()
 
         if (hoursWorked >= standadHours)
         {
-            overtimeHours = hoursWorked - standadHours;        }
-        else{
+            overtimeHours = hoursWorked - standadHours;
+        }
+        else
+        {
             overtimeHours = 0;
         }
 
         /* calculate gross pay */
         gross = hourlyWage * (hoursWorked - overtimeHours) + overtimeHours * otRate;
-
 
         /* print out employee information */
         printf("\n\tClock # | Wage | Hours | OT Hours | Gross\n");
