@@ -42,12 +42,12 @@ struct employees
 #define OT_RATE 1.5       /* multiply OT hours by this number */
 
 // function prototypes
-void getHours(struct employees employeeData[]);
-void calcOvertimeHours(struct employees employeeData[]);
-void printTableHeader();                            // we can pass the employee structure as a parameter to each function
-void calcGrossPay(struct employees employeeData[]); // instead of passing each variable individually
-void printEmployeeTable(struct employees employeeData[]);
-void printTotalsAndAverages(struct employees employeeData[]);
+void getHours(struct employees *pointer, int size);
+void calcOvertimeHours(struct employees *pointer, int size);
+void printTableHeader();                                // we can pass the employee structure as a parameter to each function
+void calcGrossPay(struct employees *pointer, int size); // instead of passing each variable individually
+void printEmployeeTable(struct employees *pointer, int size);
+void printTotalsAndAverages(struct employees *pointer, int size);
 
 int main()
 {
@@ -63,19 +63,19 @@ int main()
     printf("You will be prompted for employee data.\n\n");
 
     //function calls in main function
-    getHours(employeeData);
+    getHours(employeeData, SIZE);
 
-    calcOvertimeHours(employeeData);
+    calcOvertimeHours(employeeData, SIZE);
 
-    calcGrossPay(employeeData);
+    calcGrossPay(employeeData, SIZE);
 
     printTableHeader();
 
-    printEmployeeTable(employeeData);
+    printEmployeeTable(employeeData, SIZE);
 
     printf("\t____________________________________________________________________________\n");
 
-    printTotalsAndAverages(employeeData);
+    printTotalsAndAverages(employeeData, SIZE);
 
     printf("\n\n");
 
@@ -93,16 +93,18 @@ int main()
 //
 // Returns: hoursWorked - the number of hours worked for the given employee
 //**************************************************************************************
-void getHours(struct employees employeeData[])
+void getHours(struct employees *pointer, int size)
 {
 
-    int idx;
+    int idx; //loop index
 
-    for (idx = 0; idx < SIZE; ++idx)
+    for (idx = 0; idx < size; ++idx)
     {
         /* prompt for input values */
-        printf("Enter the number of hours %s %s worked: ", employeeData[idx].employeeName.first, employeeData[idx].employeeName.last);
-        scanf("%f", &employeeData[idx].hoursWorked);
+        printf("Enter the number of hours %s %s worked: ", pointer->employeeName.first, pointer->employeeName.last);
+        scanf("%f", &pointer->hoursWorked);
+
+        ++pointer;
     }
     printf("\n\n");
 }
@@ -118,21 +120,26 @@ void getHours(struct employees employeeData[])
 //
 // Returns: none - overtime hours are saved in the array overtimeHours
 //**************************************************************************************
-void calcOvertimeHours(struct employees employeeData[])
+void calcOvertimeHours(struct employees *pointer, int size)
 {
 
     int idx;
 
-    for (idx = 0; idx < SIZE; ++idx)
+    for (idx = 0; idx < size; ++idx)
+    {
 
-        if (employeeData[idx].hoursWorked >= STANDARD_HOURS)
+        if (pointer->hoursWorked >= STANDARD_HOURS)
         {
-            employeeData[idx].otHours = employeeData[idx].hoursWorked - STANDARD_HOURS;
+            pointer->otHours = pointer->hoursWorked - STANDARD_HOURS;
         }
         else
         {
-            employeeData[idx].otHours = 0;
+            pointer->otHours = 0;
         }
+
+        //move pointer to next employee
+        ++pointer;
+    }
 }
 //************************************************************************************
 // Function: calcGrossPay
@@ -146,13 +153,15 @@ void calcOvertimeHours(struct employees employeeData[])
 //
 // Returns: none - gross pay is saved in the array gross
 //**************************************************************************************
-void calcGrossPay(struct employees employeeData[])
+void calcGrossPay(struct employees *pointer, int size)
 {
     int idx;
 
-    for (idx = 0; idx < SIZE; ++idx)
+    for (idx = 0; idx < size; ++idx)
     {
-        employeeData[idx].gross = employeeData[idx].hourlyWage * (employeeData[idx].hoursWorked - employeeData[idx].otHours) + (employeeData[idx].otHours * OT_RATE * employeeData[idx].hourlyWage);
+        pointer->gross = pointer->hourlyWage * (pointer->hoursWorked - pointer->otHours) + (pointer->otHours * OT_RATE * pointer->hourlyWage);
+
+        ++pointer;
     }
 }
 
@@ -179,16 +188,21 @@ void printTableHeader()
 //
 // returns: none. prints the remainder of the table
 //******************************************************************************
-void printEmployeeTable(struct employees employeeData[])
+void printEmployeeTable(struct employees *pointer, int size)
 {
 
     int idx;
 
     /* print out employee information */
-    for (idx = 0; idx < SIZE; ++idx)
+    for (idx = 0; idx < size; ++idx)
     {
+        printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n",
+               pointer->employeeName.last, pointer->employeeName.first,
+               pointer->employeeName.middleInitial, pointer->clockNumber,
+               pointer->hourlyWage, pointer->hoursWorked, pointer->otHours,
+               pointer->gross);
 
-        printf("\t%s, %5s %3s. \t%06li %13.2f \t%.2f %8.2f %10.2f\n", employeeData[idx].employeeName.last, employeeData[idx].employeeName.first, employeeData[idx].employeeName.middleInitial, employeeData[idx].clockNumber, employeeData[idx].hourlyWage, employeeData[idx].hoursWorked, employeeData[idx].otHours, employeeData[idx].gross);
+        ++pointer;
     }
 }
 
@@ -205,7 +219,7 @@ void printEmployeeTable(struct employees employeeData[])
 //
 // Returns: none - prints all totals and averages to the console
 //**************************************************************************************
-void printTotalsAndAverages(struct employees employeeData[]) // pass by reference
+void printTotalsAndAverages(struct employees *pointer, int size) // pass by reference
 {
 
     float wageTotal = 0;
@@ -216,9 +230,9 @@ void printTotalsAndAverages(struct employees employeeData[]) // pass by referenc
     float hoursAverage = 0;
     float otAverage = 0;
     float grossAverage = 0;
-    float minHours = employeeData[0].hoursWorked;
-    float minOvertime = employeeData[0].otHours;
-    float minGross = employeeData[0].gross;
+    float minHours = pointer->hoursWorked;
+    float minOvertime = pointer->otHours;
+    float minGross = pointer->gross;
     float maxHours = 0;
     float maxOvertime = 0;
     float maxGross = 0;
@@ -227,28 +241,30 @@ void printTotalsAndAverages(struct employees employeeData[]) // pass by referenc
     for (idx = 0; idx < SIZE; ++idx)
     {
 
-        wageTotal += employeeData[idx].hourlyWage;   /* add employee wage to all previous employees wages */
-        hoursTotal += employeeData[idx].hoursWorked; /* add hours worked to total previous employees hours */
-        otTotal += employeeData[idx].otHours;        /* add overtime hours to all previous employees */
-        grossTotal += employeeData[idx].gross;       /* add gross pay to all previous employees */
+        wageTotal += pointer->hourlyWage;   /* add employee wage to all previous employees wages */
+        hoursTotal += pointer->hoursWorked; /* add hours worked to total previous employees hours */
+        otTotal += pointer->otHours;        /* add overtime hours to all previous employees */
+        grossTotal += pointer->gross;       /* add gross pay to all previous employees */
 
-        if (employeeData[idx].hoursWorked < minHours)
-            minHours = employeeData[idx].hoursWorked;
+        if (pointer->hoursWorked < minHours)
+            minHours = pointer->hoursWorked;
 
-        if (employeeData[idx].otHours < minOvertime)
-            minOvertime = employeeData[idx].otHours;
+        if (pointer->otHours < minOvertime)
+            minOvertime = pointer->otHours;
 
-        if (employeeData[idx].gross < minGross)
-            minGross = employeeData[idx].gross;
+        if (pointer->gross < minGross)
+            minGross = pointer->gross;
 
-        if (employeeData[idx].hoursWorked > maxHours)
-            maxHours = employeeData[idx].hoursWorked;
+        if (pointer->hoursWorked > maxHours)
+            maxHours = pointer->hoursWorked;
 
-        if (employeeData[idx].otHours > maxOvertime)
-            maxOvertime = employeeData[idx].otHours;
+        if (pointer->otHours > maxOvertime)
+            maxOvertime = pointer->otHours;
 
-        if (employeeData[idx].gross > maxGross)
-            maxGross = employeeData[idx].gross;
+        if (pointer->gross > maxGross)
+            maxGross = pointer->gross;
+
+        ++pointer;
     }
 
     wageAverage = wageTotal / SIZE;
@@ -260,9 +276,4 @@ void printTotalsAndAverages(struct employees employeeData[]) // pass by referenc
     printf("\n\tAverage \t\t\t\t%5.2f %7.1f %8.2f %10.2f\n", wageAverage, hoursAverage, otAverage, grossAverage);
     printf("\n\tMaximums:\t\t\t\t\t%.2f %8.2f %10.2f", maxHours, maxOvertime, maxGross);
     printf("\n\tMinimums:\t\t\t\t\t%.2f %8.2f %10.2f", minHours, minOvertime, minGross);
-}
-
-void minimum()
-{
-    int idx;
 }
