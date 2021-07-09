@@ -16,6 +16,7 @@
 //********************************************************/
 
 #include <stdio.h>
+#include <time.h>
 
 //define global structure for employee
 
@@ -52,6 +53,8 @@ void printTotalsAndAverages(struct employees *pointer, int size);
 int main()
 {
 
+    clock_t begin = clock();
+
     struct employees employeeData[SIZE] = {// initialize employee data (clockNumber and hourlyWage)
                                            {{"Connie", "A", "Cobol"}, 98401, 10.6},
                                            {{"Mary", "C", "Apl"}, 526488, 9.75},
@@ -78,6 +81,13 @@ int main()
     printTotalsAndAverages(employeeData, SIZE);
 
     printf("\n\n");
+
+    clock_t end = clock();
+
+    int time_spent = (int)(end - begin);
+
+    printf("\n\nTime Spent (pointers): %i \n\n", time_spent);
+
 
     return (0);
 
@@ -144,7 +154,7 @@ void calcOvertimeHours(struct employees *pointer, int size)
 //************************************************************************************
 // Function: calcGrossPay
 //
-// Purpose: given the clock number, hours worked and ovetime hours, function calculates
+// Purpose: given the clock number, hours worked and overtime hours, function calculates
 //              the total amount of pay.
 //
 // Parameters: clockNumber - the clock number of the employee
@@ -215,7 +225,7 @@ void printEmployeeTable(struct employees *pointer, int size)
 // Parameters: hourlyWage - the number of hours the employee worked
 //             hoursWorked - hours worked input by the user in the getHours function
 //             overtimeHours - the number of overtime hours the employee hoursWorked
-//             gross - the gross pay the employee will recieve
+//             gross - the gross pay the employee will receive
 //
 // Returns: none - prints all totals and averages to the console
 //**************************************************************************************
