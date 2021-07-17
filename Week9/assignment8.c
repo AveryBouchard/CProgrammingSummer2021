@@ -73,10 +73,6 @@ int main()
     //get employee data (possibly get this in it's own function?)
     while (moreData)
     {
-        //Prompt for employee ID:
-        printf("Enter Employee ID Number: ");
-        scanf("%li", &currentPointer->clockNumber);
-
         //Prompt for employee name
         printf("Enter Employee First Name: ");
         scanf("%s", &currentPointer->employeeName.first);
@@ -84,6 +80,10 @@ int main()
         scanf("%s", &currentPointer->employeeName.middleInitial);
         printf("Enter Employee Last Name: ");
         scanf("%s", &currentPointer->employeeName.last);
+
+        //Prompt for employee ID:
+        printf("Enter Employee ID Number: ");
+        scanf("%li", &currentPointer->clockNumber);
 
         //Prompt for hourly wage
         printf("Enter Hourly Wage: ");
