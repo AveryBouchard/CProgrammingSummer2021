@@ -58,7 +58,7 @@ int main()
     char answer[80];  //to see if user wants to add additional employee
     int moreData = 1; //flag to check if another employee is to be processed
     char value;       //gets first character of the answer
-    int count = 0;    //count of number of employees
+    int count = 1;    //count of number of employees
 
     struct employee *currentPointer, //pointer to current node
         *headPointer;                //always points to first node
