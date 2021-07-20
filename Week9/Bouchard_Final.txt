@@ -1,0 +1,63 @@
+1.a) Area of a Circle
+
+b) Area of a Square
+
+c) Area of a Rectangle
+
+d) Area of a Triangle
+
+______________________________________________________________________________________________________________________
+
+2) Function - words in a string
+
+/**************************************************************
+*** Function: wordsInString()
+***
+*** Description: Takes in a string and passes back the number 
+***               of words in the striung. Uses spaces as the 
+***               separator to count the number of words.
+***
+*** Parameters: A string with 1 or more words.
+***
+*** Returns: An integer with the number of words in the string.
+***************************************************************/
+int wordsInString(char *sentence) //passes a pointer to the sentence variable
+{
+    int i, //variable to hold the current character to decide whether it is a letter, a space or a Null terminator
+        count = 1; //variable to hold the number of words counted
+
+    for(i=0;sentence[i]!='\0';i++)
+    {
+        if (sentence[i] == ' ' && sentence[i+1] != '\0') //if the pointer is at a space, and the next character is not null terminator
+            ++count;                                     //increment count variable.
+    }
+
+    return(count);
+}
+
+3)Function - Is this a valid date?
+/****************************************************************
+*** Function: validDate()
+***
+*** Description: Takes in a date and determines whether the date is a valid date.
+***
+*** Parameters: Pointer to a value of integer date.
+***
+*** Returns: None. Prints to the screen whether the date is valid or not.
+***************************************************************/
+void validDate(int *date)
+{
+
+    if(date[0]<1 || date[0]>12)             // checks if the month is between 1 and 12
+        printf("Invalid Month");
+    else if(date[1]<1 || date[1]>31)        // checks if the day number is between 1 and 31
+        printf("Invalid Day");
+    else if(date[2]<1)                      // checks to make sure year is not a negative number
+        printf("Invalid Year");            
+    else if (date[0] == 2 && date[2] % 4 == 0 && date [1] > 28) 
+        printf("Invalid - Leap Year");      // if month is 2 (Feb) and the year is divisible by 4, checks if date is greater than 28 (leap year)
+    else
+        printf("The is a valid date");
+}
+
+4)

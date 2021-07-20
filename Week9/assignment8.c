@@ -175,7 +175,7 @@ void calcGrossPay(struct employee *pointer)
 {
     struct employee *temp; //temporary pointer to current node
 
-    for (temp = pointer; temp; temp = temp = temp->next)
+    for (temp = pointer; temp; temp = temp->next)
     {
         temp->gross = temp->hourlyWage * (temp->hoursWorked - temp->otHours) + (temp->otHours * OT_RATE * temp->hourlyWage);
     }
