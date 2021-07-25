@@ -37,8 +37,6 @@ void legalWord()
 
     }
 
-    printf("Count = %i\n\nCountY = %i\n\n", count, countY);
-
     if (count != 0 || countY != 0)
         printf("That is a legal word.");
     else
