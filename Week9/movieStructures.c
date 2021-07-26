@@ -10,13 +10,16 @@ struct person
 {
     char firstName[50];
     char lastName[50];
-    char role[50]
+    struct date birthday;
+    char role[50];
+    struct movie movieAppearances [100];
 };
 
-struct castAndCrew
+struct cast
 {
     struct person mainActor;
     struct person supportingActor;
+    struct person actors[20];
     struct person director;
 };
 
@@ -25,7 +28,7 @@ struct castAndCrew
 struct movie      
 {                                   
     struct date releaseDate;    // the date the movie was released */
-    struct castAndCrew cast;    // the list of actors  
+    struct cast cast;           // the list of actors  
     int starRating;             // the number of stars (out of 5) the movie received
     char title [100];           // the title of the movie 
     char description[2000];     // a short description of the movie
