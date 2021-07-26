@@ -69,7 +69,7 @@ void validDate(int *date)
 
 ______________________________________________________________________________________________________________________
 
-4)BlackJack Hands  ***Have to fix this***
+4)BlackJack Hands  
 
 #define T 10
 #define J 10
@@ -94,13 +94,29 @@ int handScore(int card1, int card2)
 {
     int score;
 
+    // check to see if card1 is a valid card
+    if (card1 < '1' && card1 > '9')
+        if (card1 <'a' && card1 > 'z')
+            if (card1 < 'A' && card1 > 'Z')
+            {
+                printf("This is an invaid hand, please try again.\n\n");
+            }
+    
+    // check to see if card2 is a valid card
+    if (card2 < '0' && card2 > '9')
+        if (card2 <'a' && card2 > 'z')
+            if (card2 < 'A' && card2 > 'Z')
+            {
+                printf("This is an invaid hand, please try again.\n\n");
+            } 
+
     if (card1 > 11)
         printf("Invalid Card1");
 
     if (card2 > 11)
         printf("Invalid Card2");
 
-    if (card1 == 1)
+    if (card1 == 1 && card2 == 1)
         card1 = 11;
 
     score = card1 + card2;
@@ -150,7 +166,7 @@ void legalWord()
 
     }
 
-    if (count != 0 || countY != 0)
+    if (count != 0 || countY != 0)          // ensures either vowels or y are in the string
         printf("That is a legal word.");
     else
         printf("That is NOT a legal word!");
@@ -203,4 +219,215 @@ void palindrome()
 
 ______________________________________________________________________________________________________________________
 
-7)
+7) String Characteristics Structure  
+
+void getCharacteristics(struct stringCharacteristics * pointer)
+{
+
+    int idx;
+
+    printf("Type in a string to get the characteristics (up to 100 characters): ");
+    scanf("%s", &pointer->string);
+
+    pointer->length = strlen(pointer->string);
+
+    for (idx = 0; idx < pointer->length; idx++)
+        {
+            if (pointer->string[idx] >= 'A' && pointer->string[idx] <= 'Z')
+                pointer->upperLetters++;
+
+            else if (pointer->string[idx] >= 'a' && pointer->string[idx] <= 'z')
+                pointer->lowerLetters++;
+
+            else if (pointer->string[idx] >= '0' && pointer->string[idx] <= '9')
+                pointer->digits++;
+
+            else if (pointer->string[idx] == ' ')
+                pointer->blankSpaces++;
+
+            else 
+                pointer->nonAlphaCharacters++;
+        }
+
+    printf("%i", pointer->upperLetters);
+
+    return;
+}
+
+______________________________________________________________________________________________________________________
+
+8)Baseball Stats
+
+/************************************************************
+***Function: hits()
+***
+***Description: Takes in singles, doubles, triples and homeruns and
+***                 adds them together to get total hits.
+***
+***Parameters: singles, doubles, triples and homeruns.
+***
+***Returns: Number of total hits.
+*************************************************************/
+float hits(float singles, float doubles, float triples, float homeRuns)
+{
+    int hits = (singles + doubles + triples + homeRuns);
+
+    return hits;
+}
+
+/************************************************************
+***Function: totalBases()
+***
+***Description: Takes in singles, doubles, triples and homeruns and
+***                 figures out total number of bases the player was on.
+***
+***Parameters: singles, doubles, triples and homeruns.
+***
+***Returns: Number of total bases.
+*************************************************************/
+int totalBases(float singles, float doubles, float triples, float homeRuns)
+{
+    int total = (singles + doubles*2 + triples*3 + homeRuns*4);
+
+    return total;
+}
+
+/************************************************************
+***Function: battingAverage()
+***
+***Description: Takes in singles, doubles, triples and homeruns and
+***                 divides by total atBats to determine batting average.
+***
+***Parameters: singles, doubles, triples, homeruns and atBats.
+***
+***Returns: Batting Average.
+*************************************************************/
+float battingAverage(float singles, float doubles, float triples, float homeRuns, float atBats)
+{
+    int totalHits;
+
+    totalHits = hits(singles, doubles, triples, homeRuns);
+    float average = ( totalHits / atBats);
+
+    return average;
+}
+
+/************************************************************
+***Function: homeRunRatio()
+***
+***Description: Takes in homeruns and divides by total atBats to
+***                 determine how many atBats per homerun.
+***
+***Parameters: homeruns and atBats.
+***
+***Returns: Ratio of homeruns to atBats.
+*************************************************************/
+float homeRunRatio(float homeRuns, float atBats)
+{
+    float ratio = homeRuns / atBats;
+
+    return ratio;
+}
+
+/************************************************************
+***Function: strikeOutRatio()
+***
+***Description: Takes in strikeouts and divides by total atBats to
+***                 determine how many atBats per strikeout.
+***
+***Parameters: strikeOuts and atBats.
+***
+***Returns: Ratio of strikeouts to atBats.
+*************************************************************/
+float strikeOutRatio(float strikeOuts, float atBats)
+{
+    float ratio = strikeOuts / atBats;
+
+    return ratio;
+}
+
+/************************************************************
+***Function: onBasePercentage()
+***
+***Description: Determines total times on base (hits + walks + hit by pitch)
+***                 then divides by total number of times the player batted.
+***
+***Parameters: totalHits(determined in main function by hits() function), walks,
+***             hitByPitch, atBats, sacFlys.
+***
+***Returns: Percentage of time player got on base.
+*************************************************************/
+float onBasePercentage(float totalHits, float walks, float hitByPitch, float atBats, float sacFlys)
+{
+    float percentage = (totalHits + walks + hitByPitch) /
+                        (atBats + walks + hitByPitch + sacFlys);
+
+    return percentage;
+}
+
+/************************************************************
+***Function: sluggingPercentage()
+***
+***Description: Takes in total bases and divides by atBats to 
+***                 determine how many bases per at bat the player gets.
+***
+***Parameters: singles, doubles, triples, homeRuns, atBats.
+***
+***Returns: slugging percentage.
+*************************************************************/
+float sluggingPercentage(float singles, float doubles, float triples, float homeRuns, float atBats)
+{
+    float bases, percentage;
+
+    bases = totalBases(singles,  doubles,  triples,  homeRuns);
+
+    percentage = bases / atBats;
+
+    return percentage;
+}
+
+______________________________________________________________________________________________________________________
+
+9)Movie Structures
+
+struct date       
+{            
+    int month;            
+    int day;            
+    int year;      
+}; 
+
+struct person
+{
+    char firstName[50];
+    char lastName[50];
+    struct date birthday;
+    char role[50];
+    struct movie movieAppearances [100];
+};
+
+struct cast
+{
+    struct person mainActor;            // the main actor
+    struct person supportingActor;      // the main secondary actor
+    struct person actors[20];           // up to 20 additional actors
+    struct person director;             // the director of the movie
+};
+
+
+
+struct movie      
+{                                   
+    struct date releaseDate;    // the date the movie was released
+    struct cast cast;           // the list of actors  
+    int starRating;             // the number of stars (out of 5) the movie received
+    char title [100];           // the title of the movie 
+    char description[2000];     // a short description of the movie
+    char country[50];           // country the movie was made in
+    int boxOfficeEarnings;      // the amount the movie made in the theater
+    char language[50];          // language the movie is in
+    float budget;               // the amount the movie took to make
+    struct movie similarMovies[10]; // 10 movies that are like this movie
+    
+};      
+

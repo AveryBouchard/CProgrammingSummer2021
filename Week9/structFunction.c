@@ -56,6 +56,6 @@ void getCharacteristics(struct stringCharacteristics * pointer)
 
     printf("%i", pointer->upperLetters);
 
-    return;
+    return(struct stringCharacteristics * pointer);
 }
 
